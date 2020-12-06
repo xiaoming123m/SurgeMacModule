@@ -1,123 +1,172 @@
-#!name=Q-Search
+#!name=xiaoming123m
 #!desc=Safari Search Add-ons by Loyio
 
 
 [URL Rewrite]
-#gm   (Google图片)
-^https:\/\/duckduckgo.com\/\?q=gm\+([^&]+).+ https://www.google.com/search?&tbm=isch&q=$1 302
-# gh   (GitHub)
-^https:\/\/duckduckgo.com\/\?q=gh\+([^&]+).+ https://github.com/search?q=$1 302
+# > yichahucha
+# > 京东比价
+jd_price.js = type=http-response,pattern=^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/yichahucha/surge/master/jd_price.js,script-update-interval=0
+ 
+# > 淘宝比价
+# 不生效或失效的需要卸载 tb 重装，注意不开脚本进 tb 会失效
+tb_price.js = requires-body=1,script-path=https://raw.githubusercontent.com/yichahucha/surge/master/tb_price.js,type=http-request,pattern=^http://.+/amdc/mobileDispatch
+tb_price.js = requires-body=1,script-path=https://raw.githubusercontent.com/yichahucha/surge/master/tb_price.js,type=http-response,pattern=^https?://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail
 
-# sof  (Stack Overflow)
-^https:\/\/duckduckgo.com\/\?q=sof\+([^&]+).+ https://stackoverflow.com/search?q=$1 302
+# Appstore Speed up download (By langkhach)
+dnspod = script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/dnspod.js,script-update-interval=0,type=dns
 
-# se  (StackExchange)
-^https:\/\/duckduckgo.com\/\?q=se\+([^&]+).+ https://stackexchange.com/search?q=$1 302
+# wifi_proxy 变更
+// wifi_proxy.js = debug=1,script-path=wifi_proxy.js,type=event,event-name=network-changed
 
-# wa  (WolframAlpha)
-^https:\/\/duckduckgo.com\/\?q=wa\+([^&]+).+ https://www.wolframalpha.com/input/?i=$1 302
+# 滴答清单5.4.11
+// didaqingdan.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/didaqingdan.js,script-update-interval=0,type=http-response,pattern=^https:\/\/(ticktick|dida365)\.com\/api\/v2\/user\/status
 
-# wiki  (维基百科)
-^https:\/\/duckduckgo.com\/\?q=wiki(\+|%20)([^&]+).+ http://wikipedia.org/wiki/$2 302
+# 扫描全能王
+CamScanner.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/CamScanner.js,type=http-response,pattern=https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\?
 
-# wk  (维基中文)
-^https:\/\/duckduckgo.com\/\?q=wk(\+|%20)([^&]+).+ https://zh.wikipedia.org/wiki/$2 302
+# Bear熊掌记专业版
+// bear.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/bear.js,type=http-response,pattern=^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt
 
-# mg  (Magi)
-^https:\/\/duckduckgo.com\/\?q=mg(\+|%20)([^&]+).+ https://magi.com/search?q=$2
+# Documents专业版
+// documents.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/documents.js,type=http-response,pattern=^https:\/\/license\.pdfexpert\.com\/api\/.*\/documents\/subscription\/(refresh$|check$)
 
-# tf  (Google 搜索 TestFlight)
-^https:\/\/duckduckgo.com\/\?q=tf(\+|%20)([^&]+).+ https://www.google.com/search?as_q=$2&as_sitesearch=testflight.apple.com 302
+# PDF expert
+// Pdfexpert.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/Pdfexpert.js,type=http-response,pattern=^https:\/\/license\.pdfexpert\.com\/api\/1\.0\/pdfexpert6\/subscription\/(refresh$|check$)
+Pdfexpert.vip.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/langkhach270389/Scripting/master/Pdfexpert.vip.js,script-update-interval=0,type=http-response,pattern=^https:\/\/license\.pdfexpert\.com\/api\/.+\/subscription\/(refresh$|check$)
 
-# > 翻译
-# yd   (有道)
-^https:\/\/duckduckgo.com\/\?q=yd\+([^&]+).+ http://dict.youdao.com/search?q=$1 302
+# 流利说 阅读2.6.1
+LLYD.js = requires-body=1,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/LLYD.js,type=http-response,pattern=^https?:\/\/vira\.llsapp\.com\/api\/v2\/readings\/(accessible|limitation)
 
-# trc  (Google 译至中)
-^https:\/\/duckduckgo.com\/\?q=trc\+([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=zh-CN&text=$1 302
+# 酷我音乐下载
+KuWoMusicDownload.js = script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/KuWoMusicDownload.js,type=http-request,pattern=https?:\/\/musicpay\.kuwo.cn\/music\.pay\?uid=\d+
+Kuwo.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Kuwo.js,type=http-response,pattern=^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice)
 
-# tre  (Google 译至英)
-^https:\/\/duckduckgo.com\/\?q=tre\+([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$1 302
+# 用药助手
+yyzs.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/yyzs.js,type=http-response,pattern=^https?:\/\/(i|newdrugs)\.dxy\.cn\/(snsapi\/username\/|app\/user\/(pro\/stat\?|init\?timestamp=))
 
-# trj  (Google 译至日)
-^https:\/\/duckduckgo.com\/\?q=trj\+([^&]+).+ https://translate.google.com/#view=home&op=translate&sl=auto&tl=ja&text=$1 302
+# Keep会员
+Keep.js = requires-body=1,max-size=0,script-path=https://github.com/nzw9314/QuantumultX/tree/master/NobyDa/Surge/JS/Keep.js,type=http-response,pattern=^https:\/\/api\.gotokeep\.com\/(.+\/subject|.+\/dynamic)
 
+# 腾讯新闻去广告
+QQNews.js = requires-body=1,max-size=-1,script-path=https://Choler.github.io/Surge/Script/QQNews.js,type=http-response,pattern=https://r\.inews\.qq.com\/get(QQNewsUnreadList|RecommendList)
 
-# 社区
-# db：豆瓣
-^https:\/\/duckduckgo.com\/\?q=db\+([^&]+).+ https://www.douban.com/search?source=suggest&q=$1 302
+# Youtube去广告
+// YouTube.js = script-path=https://Choler.github.io/Surge/Script/YouTube.js,type=http-request,pattern=^https://[\s\S]*\.googlevideo\.com/.*&(oad|ctier)
 
-# zh: 知乎
-^https:\/\/duckduckgo.com\/\?q=zh\+([^&]+).+ https://www.zhihu.com/search?type=content&q=$1 302
+# 大千视界
+dqsj.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/dqsj.js,type=http-response,pattern=^https:\/\/api\.mvmtv\.com\/index\.php.*(c=user.*a=info|a=addr.*vid=.*)
 
-# wb: 微博
-^https:\/\/duckduckgo.com\/\?q=wb\+([^&]+).+ https://s.weibo.com/weibo/$1 302
+# JD 价格
+jd_price.js = script-path=https://raw.githubusercontent.com/yichahucha/surge/master/jd_price.js,requires-body=1,type=http-response,pattern=^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig)
 
-# wx: 微信
-^https:\/\/duckduckgo.com\/\?q=wx\+([^&]+).+ https://weixin.sogou.com/weixinwap?query=$1 302
+# WPS会员
+WPS.js = requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/WPS.js,type=http-response,pattern=^https?:\/\/account\.wps\.cn\/api\/users
 
-# rd  (Reddit)
-^https:\/\/duckduckgo.com\/\?q=rd\+([^&]+).+ https://www.reddit.com/search?q=$1 302
+# 人人视频
+rrtv.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/rrtv.js,type=http-response,pattern=^https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll|\/rrtv-video\/v4plus\/season\/detail)
 
-# tw (Twitter)
-^https:\/\/duckduckgo.com\/\?q=tw\+([^&]+).+ https://twitter.com/search?q=$1 302
+# Workingcopy
+workingcopy.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/workingcopy.js,type=http-response,pattern=^https:\/\/education\.github\.com\/api\/user$
 
-# ssp: 少数派
-^https:\/\/duckduckgo.com\/\?q=ssp\+([^&]+).+ https://sspai.com/search/post/$1 302
+# 鹿琪讲故事
+luqi.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/luqi.js,type=http-response,pattern=^https:\/\/www\.luqijianggushi\.com\/api\/v2\/user\/get
 
-# csdn: CSDN
-^https:\/\/duckduckgo.com\/\?q=csdn\+([^&]+).+ https://so.csdn.net/so/search/s.do?q=$1&t=&u= 302
+# Lingokids去会员
+lingokids.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/lingokids.js,type=http-response,pattern=^https:\/\/api\.lingokids\.com\/v1\/renovate_session$
 
-# > 购物
-# zdm: 什么值得买
-^https:\/\/duckduckgo.com\/\?q=zdm\+([^&]+).+ https://search.smzdm.com/?c=home&s=$1&v=b 302
+# 洪恩双语绘本
+hnsyhb.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/hnsyhb.js,type=http-response,pattern=https:\/\/bookapi\.ihuman\.com\/(v1\/get\_user\_info|v1\/get\_purchase\_list)
 
-# amz: 亚马逊
-^https:\/\/duckduckgo.com\/\?q=amz\+([^&]+).+ https://www.amazon.cn/gp/aw/s/?k=$1 302
+# 有道云笔记
+ydybj.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/ydybj.js,type=http-response,pattern=https://note.youdao.com/yws/(mapi/payment|api/self)
 
-# jd : 京东
-^https:\/\/duckduckgo.com\/\?q=jd\+([^&]+).+ https://search.jd.com/Search?keyword=$1 302
+# 彩云小译
+cyxy.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/cyxy.js,type=http-response,pattern=^https:\/\/api\.interpreter\.caiyunai\.com\/v1\/user
 
-# tb: 淘宝
-^https:\/\/duckduckgo.com\/\?q=tb\+([^&]+).+ https://s.taobao.com/search?q=$1 302
+# 每日英语（破解讲义）
+mryy.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/mryy.js,type=http-response,pattern=^https:\/\/dict\.eudic\.net\/jingting\/GetThisChapterTaskStatus?
 
-# tm: 天猫
-^https:\/\/duckduckgo.com\/\?q=tm\+([^&]+).+ https://list.tmall.com/search_product.htm?q=$1 302
+# 淘宝价格
+tb_price.js = requires-body=1,script-path=https://raw.githubusercontent.com/yichahucha/surge/master/tb_price.js,type=http-response,pattern=^http://amdc\.m\.taobao\.com/amdc/mobileDispatch
+tb_price.js = requires-body=1,script-path=https://raw.githubusercontent.com/yichahucha/surge/master/tb_price.js,type=http-response,pattern=^https?://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail
 
-# 视频资源
+# 京东到家 签到
+// jddj.cookie.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/jddj/jddj.cookie.js,type=http-request,pattern=^https:\/\/daojia.jd.com/client(.*?)functionId=signin(.*?)userSigninNew
+jddj.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/jddj/jddj.js,script-update-interval=0,type=cron,cronexp=7 0 8 ? * *
 
-# ac (Acfun)
-^https:\/\/duckduckgo.com\/\?q=ac\+([^&]+).+ https://www.acfun.cn/search?keyword==$1 302
+# 喜马拉雅 签到
+// ximalaya.cookie.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/ximalaya/ximalaya.cookie.js,script-update-interval=0,type=http-request,pattern=^https?:\/\/.*\/mobile\-user\/homePage\/.*
+ximalaya.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/ximalaya/ximalaya.js,type=cron,cronexp=5 0 8 ? * *
 
-# bli (哔哩哔哩) 
-^https:\/\/duckduckgo.com\/\?q=bli\+([^&]+).+ https://search.bilibili.com/all?keyword=$1 302
+# 人人视频 签到
+// rrtv.cookie.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/rrtv/rrtv.cookie.js,script-update-interval=0,type=http-request,pattern=^https:\/\/api\.rr\.tv\/user\/profile
+rrtv.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/rrtv/rrtv.js,type=cron,cronexp=0 0 8 ? * *
 
-# ytb  (YouTube)
-^https:\/\/duckduckgo.com\/\?q=ytb\+([^&]+).+ https://www.youtube.com/results?search_query=$1 302
+# 腾讯视频 签到
+// videoqq.cookie.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/videoqq/videoqq.cookie.js,type=http-request,pattern=^https:\/\/access.video.qq.com\/user\/auth_refresh
+// videoqq.cookie.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/videoqq/videoqq.cookie.js,type=http-request,pattern=^https?:\/\/v.qq.com\/x\/bu\/mobile_checkin
+videoqq.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/videoqq/videoqq.js,type=cron,cronexp=10 0 8 ? * *
 
-# ph  (PornHub) 
-^https:\/\/duckduckgo.com\/\?q=ph\+([^&]+).+ https://pornhub.com/video/search?search=$1 302
+# APP 价格
+AppPricer.js = script-path=https://raw.githubusercontent.com/Neurogram-R/Surge/master/AppPricer.js,type=cron,cronexp=0 * * * *
 
-# gd  (Google Drive)
-^https:\/\/duckduckgo.com\/\?q=gd\+([^&]+).+ https://www.google.com/search?q=%22Google+Drive%22+$1 302
+# WPS 签到
+// wps.cookie.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/wps/wps.cookie.js,type=http-request,pattern=^https:\/\/zt.wps.cn\/2018\/docer_check_in\/api\/act_list
+wps.js = script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/wps/wps.js,type=cron,cronexp=15 0 8 ? * *
 
-# tgd  (t.me/gdurl 搜索 Google Drive 资源)
-^https:\/\/duckduckgo.com\/\?q=tgd\+([^&]+).+ https://t.me/s/gdurl?q=$1 302
+# 微信公众号去广告
+WeChat.js = script-path=https://Choler.github.io/Surge/Script/WeChat.js,type=http-request,pattern=^https://mp\.weixin\.qq\.com/mp/getappmsgad
 
-# 默认搜索
+# Nhaccuatui 音乐
+nhaccuatui.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/nhaccuatui.js,type=http-response,pattern=^https:\/\/graph\.nhaccuatui\.com\/.*\/users\/info*
 
-# bi: 必应
-^https:\/\/duckduckgo.com\/\?q=bi\+([^&]+).+ https://cn.bing.com/search?q=$1 302
+# Itranslate专业版
+itranslate.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/langkhach270389/Scripting/master/itranslate.js,script-update-interval=0,type=http-response,pattern=^https:\/\/ssl-api\.itranslateapp\.com\/.*\/subscriptions\/.*\/ios$
 
-# bd: 百度
-^https:\/\/duckduckgo.com\/\?q=bd\+([^&]+).+ https://www.baidu.com/s?wd=$1 302
+# Xmind会员
+XMind.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/XMind.js,script-update-interval=0,type=http-response,pattern=https:\/\/www\.xmind\.cn\/\_res\/devices
 
-# ddg: DuckDuckGo 
-^https:\/\/duckduckgo.com\/\?q=ddg\+([^&]+).+ https://duckduckgo.com/?ia=about&q=$1 302
+# 石墨文档 (By Alex0510)
+shimo.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/shimo.js,type=http-response,pattern=https://api.shimo.im/users/
 
-# 无指令: 谷歌
-^https:\/\/duckduckgo.com\/\?q=([^&]+).+ https://www.google.com/search?q=$1 302
+# 奇热小说 解锁收费章节(By @@ios4521) 进入收费章节-点击"立即解锁"
+qrxs.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/qrxs.js,type=http-response,pattern=^https://api.weiqire.com/api3/(visitor/|user/unlockCharpter)
+
+# > 美颜相机一次性解锁内购（by黑黑酱）
+myxj.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/myxj.js,type=http-response,pattern=^https:\/\/api\.meiyan\.com\/iap\/verify\.json
+
+# > JAV101无限观看 (By 凉意)
+JAV101.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/JAV101.js,type=http-response,pattern=^https\:\/\/api\.gao1gps\.cn\/v1\/user\/info
+
+# 全家桶
+qjt.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/qjt.js, type=http-response,pattern=https://app.xunjiepdf.com/api/v4/virtualactregister
+# 迅捷应用6合1 （by LTribe）
+xunjie.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/xunjie.js,type=http-response,pattern=^https?:\/\/.*\.xunjie.*\.com\/api\/v\d\/*
+
+# 蜗牛睡眠会员（by 黑黑酱）
+wnsm.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/wnsm.js,type=http-response,pattern=^https:\/\/snailsleep\.net\/snail\/v1\/profile\/get
+
+# > 万里影视 无限时常（by LTribe）
+Wanliyingshi.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/Wanliyingshi.js,type=http-response,pattern=^http?:\/\/.*\.arten.cn/login/login
+
+# gk扫描仪(by @superuv)
+smy.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/smy.js,type=http-response,pattern=^https:\/\/api\.gkocr\.com\/api\/userlogin1.php
+
+# 智能证件照相机 (by @superuv)
+znzj.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/znzj.js,type=http-response,pattern=^https:\/\/app\.xunjiepdf\.com\/api\/v4\/virtualactregister
+
+# draft
+draft.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/draft.js,type=http-response,pattern=^https:\/\/backend\.getdrafts\.com\/api\/.*\/verification*
+
+# Old_iPA_Downloader by @Lãng Khách
+old_ipa.js = type=http-request,pattern=(https:\/\/.+\-buy\.itunes\.apple\.com\/WebObjects\/MZBuy.woa\/wa\/buyProduct)|(https:\/\/api\.unlimapps\.com\/.+\/apple_apps\/.+\/versions\?=),requires-body=1,max-size=0,debug=1,script-path=https://raw.githubusercontent.com/langkhach270389/Scripting/master/Surge/old_ipa.js
+
+#拍照取字
+pzqz.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/pzqz.js,type=http-response,pattern=^http:\/\/pay\.maoqilai\.com\/get_user_info
+
+#通话录音
+thly.js = requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/xiaoming123m/XM/master/ssd/thly.js,type=http-response,pattern=http://micro-tool-api.foundao.com/orderPayCenterService/user/userInfo
 
 
 [MITM]
-hostname = %APPEND% duckduckgo.com
+hostname = micro-tool-api.foundao.com, pay.maoqilai.com, %APPEND% *-buy.itunes.apple.com, api.unlimapps.com, backend.getdrafts.com, api.gkocr.com, *.arten.cn, snailsleep.net, *.xunjie*.com, app.xunjiepdf.com, api.gao1gps.cn, api.meiyan.com, app.api.versa-ai.com, api.weiqire.com, api.shimo.im, www.xmind.cn, ssl-api.itranslateapp.com, zt.wps.cn, graph.nhaccuatui.com, mp.weixin.qq.com, *.rr.tv, *.video.qq.com, v.qq.com, mobwsa.ximalaya.com, daojia.jd.com, trade-acs.m.taobao.com, dict.eudic.net, note.youdao.com, buy.itunes.apple.com, www.luqijianggushi.com, *.snssdk.com, api.rr.tv, account.wps.cn, api.m.jd.com, api.bjxkhc.com, vip1.kuwo.cn，vip1.kuwo.cn, bookapi.ihuman.com, pay.guoing.com, license.pdfexpert.com, p.doras.api.vcinema.cn, education.github.com, newdrugs.dxy.cn, ticktick.com, viva.v21xy.com, api.gotokeep.com, r.inews.qq.com, ios.fuliapps.com, apple.fuliapps.com, api.lingokids.com, www.peacefulsoundsapp.com, api.mvmtv.com, vira.llsapp.com, *.googlevideo.com, #dida365.com, ap*.intsig.net
